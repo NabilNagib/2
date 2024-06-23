@@ -11,26 +11,11 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const response = await fetch('https://one-cb6z.onrender.com/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-            const data = await response.json();
-            
-            if (response.ok) {
-                login({ email }); 
-                navigate('/'); 
-            } else {
-                alert(data.message || 'Failed to login');
-            }
-        } catch (error) {
-            alert('Failed to login: ' + error.message);
+        const response = await login({email, password});
+        if (response) {
+            navigate('/')
         }
+
     };
 
     return (

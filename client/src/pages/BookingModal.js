@@ -20,8 +20,7 @@ const BookingModal = ({ isOpen, onClose, hotel, guestId, guestName }) => {
             date_of_departure: departureDate,
             status: status,
             hotel_id: hotel.id,
-            guest_id: guestId, 
-            guest_name: guestName, 
+            guest_id: guestId,
             total_amount: hotel.daily_rate * calculateDays(),
         };
 

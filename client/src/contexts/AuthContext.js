@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -16,20 +17,24 @@ export const AuthProvider = ({ children }) => {
         if (!credentials || !credentials.email) {
             throw new Error('Login credentials are missing or invalid.');
         }
-
-        const { email } = credentials;
-
-        if (email === 'troy@mail.com') {
-            setRole('admin');
-            setGuestId(1); 
-            setGuestName('Troy'); 
-        } else {
-            setRole('guest');
-            setGuestId(2); 
-            setGuestName('Other User'); 
+        try {
+            const response = await axios.post('https://one-cb6z.onrender.com/login',credentials)
+            
+            
+            if (response) {
+                console.log(response.data)
+                setIsLoggedIn(true);
+                setGuestId(response.data.guestId);
+                setRole(response.data.role);
+                setGuestName(response.data.guestName);
+                return response.data;
+            } else {
+                alert( 'Failed to login');
+            }
+        } catch (error) {
+            alert('Failed to login: ' + error.message);
         }
 
-        setIsLoggedIn(true);
     };
 
     const logout = async () => {
