@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import BookingDetails from './pages/BookingDetails';
 import Footer from './pages/Footer';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import AdminContainer from './pages/AdminContainer';
