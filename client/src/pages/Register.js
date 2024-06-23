@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import './Register.css'; 
 
 const Register = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Register = () => {
         firstName: Yup.string()
             .required('First Name is required'),
         secondName: Yup.string()
-            .required('Second Name is required'),  // Updated field name
+            .required('Second Name is required'),
         email: Yup.string()
             .email('Invalid email')
             .required('Email is required'),
@@ -54,8 +55,8 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
+        <div className="register-container">
+            <h3>Sign Up</h3>
             <Formik
                 initialValues={{
                     firstName: '',
@@ -68,33 +69,33 @@ const Register = () => {
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting }) => (
-                    <Form>
-                        <div>
+                    <Form className="register-form"> 
+                        <div className="form-group"> 
                             <label htmlFor="firstName">First Name:</label>
-                            <Field type="text" id="firstName" name="firstName" required />
-                            <ErrorMessage name="firstName" component="div" />
+                            <Field type="text" id="firstName" name="firstName" className="form-control" />
+                            <ErrorMessage name="firstName" component="div" className="error-message" />
                         </div>
-                        <div>
+                        <div className="form-group"> 
                             <label htmlFor="secondName">Second Name:</label>
-                            <Field type="text" id="secondName" name="secondName" required />
-                            <ErrorMessage name="secondName" component="div" />
+                            <Field type="text" id="secondName" name="secondName" className="form-control" />
+                            <ErrorMessage name="secondName" component="div" className="error-message" />
                         </div>
-                        <div>
+                        <div className="form-group"> 
                             <label htmlFor="email">Email:</label>
-                            <Field type="email" id="email" name="email" required />
-                            <ErrorMessage name="email" component="div" />
+                            <Field type="email" id="email" name="email" className="form-control" />
+                            <ErrorMessage name="email" component="div" className="error-message" />
                         </div>
-                        <div>
+                        <div className="form-group"> 
                             <label htmlFor="password">Password:</label>
-                            <Field type="password" id="password" name="password" required />
-                            <ErrorMessage name="password" component="div" />
+                            <Field type="password" id="password" name="password" className="form-control" />
+                            <ErrorMessage name="password" component="div" className="error-message" />
                         </div>
-                        <div>
+                        <div className="form-group"> 
                             <label htmlFor="mobile">Mobile:</label>
-                            <Field type="text" id="mobile" name="mobile" />
-                            <ErrorMessage name="mobile" component="div" />
+                            <Field type="text" id="mobile" name="mobile" className="form-control" />
+                            <ErrorMessage name="mobile" component="div" className="error-message" />
                         </div>
-                        <button type="submit" disabled={isSubmitting}>Register</button>
+                        <button type="submit" disabled={isSubmitting} className="btn-register">Register</button> 
                     </Form>
                 )}
             </Formik>

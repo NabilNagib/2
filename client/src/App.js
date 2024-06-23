@@ -12,6 +12,7 @@ import HotelsList from './pages/HotelsList';
 import AddHotel from './pages/AddHotel';
 import AmendHotel from './pages/AmendHotel';
 import DeleteHotel from './pages/DeleteHotel';
+import BookingDetails from './components/BookingDetails';
 import { AuthProvider, useAuth } from './contexts/AuthContext'; // Adjust the path as per your file structure
 import './App.css';
 
@@ -63,6 +64,7 @@ const AdminProtectedRoutes = () => {
     return (
         <>
             <Route path="/" element={<AdminDashboard />} />
+            <Route path="/list" element={<BookingDetails />} />
             <Route path="/guests" element={<GuestsList />} />
             <Route path="/hotels" element={<HotelsList />} />
             <Route path="/add-hotel" element={<AddHotel />} />

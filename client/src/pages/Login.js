@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import './Login.css'; 
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Implement your login logic here, e.g., using fetch()
+
         try {
             const response = await fetch('https://one-cb6z.onrender.com/login', {
                 method: 'POST',
@@ -20,9 +21,10 @@ const Login = () => {
                 body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
+            
             if (response.ok) {
-                login(); // Update login state in context
-                navigate('/'); // Redirect to Home page
+                login({ email }); 
+                navigate('/'); 
             } else {
                 alert(data.message || 'Failed to login');
             }
@@ -32,28 +34,30 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="login-container"> 
             <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className="login-form"> 
+                <div className="form-group"> 
                     <label>Email:</label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        className="form-control" 
                     />
                 </div>
-                <div>
+                <div className="form-group"> 
                     <label>Password:</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        className="form-control"
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="btn-login">Login</button> 
             </form>
         </div>
     );

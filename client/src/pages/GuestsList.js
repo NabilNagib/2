@@ -6,7 +6,7 @@ const GuestsList = () => {
     useEffect(() => {
         const fetchGuests = async () => {
             try {
-                const response = await fetch('/guests'); // Fetch from your backend endpoint
+                const response = await fetch('https://one-cb6z.onrender.com/guests'); 
                 const data = await response.json();
                 setGuests(data);
             } catch (error) {
