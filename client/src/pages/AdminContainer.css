@@ -1,216 +1,111 @@
-/* Admin Dashboard container */
 .admin-section {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .admin-card {
-    background-color: #f0f0f0;
+    background-color: #f4f4f4;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.admin-card p {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
 .admin-link {
-    padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
     text-decoration: none;
 }
 
-.admin-link:hover {
-    background-color: #45a049;
+.query-form {
+    margin-top: 20px;
 }
 
-/* Query form */
+.query-result-container {
+    display:flexbox;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.query-result-content {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li { 
+    list-style: none;
+}
+
 .query-form {
-    margin-bottom: 20px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .query-form form {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
 }
 
 .query-form label {
-    font-size: 18px;
-    margin-right: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .query-form input[type="text"] {
+    width: 100%;
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
     border-radius: 4px;
+    font-size: 16px;
 }
 
 .query-form button {
-    padding: 10px 20px;
-    background-color: #008CBA;
+    margin-bottom: 16px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .query-form button:hover {
-    background-color: #007A99;
+    background-color: #0056b3;
 }
 
-/* Query results */
-.query-results {
-    margin-top: 20px;
-}
-
-.query-results h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.query-results p {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.query-results ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.query-results ul li {
-    font-size: 16px;
-    margin-left: 20px;
-}
-
-/* Modal overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.modal-content .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.modal-content .close:hover {
-    color: black;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .admin-section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .admin-card {
-        width: 80%;
-        margin-bottom: 20px;
-    }
-
+@media (min-width: 768px) {
     .query-form form {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: flex-end;
     }
 
     .query-form label {
-        margin-bottom: 5px;
+        margin-right: 15px;
+        margin-bottom: 0;
+
     }
 
     .query-form input[type="text"] {
-        width: 100%;
-        margin-bottom: 10px;
+        width: 300px;
     }
-}
 
-.query-result-container {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.query-result-title {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-}
-
-.query-result-content {
-    background-color: white;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.query-result-item {
-    margin-bottom: 10px;
-    font-size: 16px;
-    text-align: center;
-}
-
-
-.query-result-item strong {
-    font-weight: bold;
-    color: #555;
-
-}
-
-.booked-hotels-list {
-    text-align: center;
-    list-style-type: none;
-    padding-left: 20px;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-}
-
-.booked-hotel-item {
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #666;
-}
-
-.booked-hotel-item:before {
-    content: "•";
-    color: #999;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    .query-form button {
+        margin-top: 0;
+    }
 }

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import AddHotelModal from './AddHotelModal';
+import GuestsList from './GuestsList';
+import BookingDetails from './BookingDetails';
 import './AdminContainer.css';
 
 const AdminContainer = () => {
     const [showAddHotelModal, setShowAddHotelModal] = useState(false);
+    const [showGuestsList, setShowGuestsList] = useState(false);
+    const [showBookingDetails, setShowBookingDetails] = useState(false);
     const [guestsCount, setGuestsCount] = useState(0);
     const [hotelsCount, setHotelsCount] = useState(0);
+    const [bookingsCount, setBookingsCount] = useState(0); 
     const [queryInput, setQueryInput] = useState('');
     const [queryResult, setQueryResult] = useState(null);
 
@@ -38,8 +43,23 @@ const AdminContainer = () => {
             }
         };
 
+        const fetchBookingsCount = async () => {
+            try {
+                const response = await fetch('https://one-cb6z.onrender.com/bookings');
+                if (response.ok) {
+                    const data = await response.json();
+                    setBookingsCount(data.length);
+                } else {
+                    console.error('Failed to fetch bookings count');
+                }
+            } catch (error) {
+                console.error('Error fetching bookings count:', error);
+            }
+        };
+
         fetchGuestsCount();
         fetchHotelsCount();
+        fetchBookingsCount();
     }, []);
 
     const handleQueryChange = (event) => {
@@ -72,6 +92,14 @@ const AdminContainer = () => {
         setShowAddHotelModal(false);
     };
 
+    const toggleGuestsList = () => {
+        setShowGuestsList(prevState => !prevState);
+    };
+
+    const toggleBookingDetails = () => {
+        setShowBookingDetails(prevState => !prevState);
+    };
+
     return (
         <div>
             <h1>Admin Dashboard</h1>
@@ -79,17 +107,30 @@ const AdminContainer = () => {
                 <div className="admin-card">
                     <button className="admin-link" onClick={openAddHotelModal}>Add New Hotel</button>
                 </div>
-                            <AddHotelModal 
-                isOpen={showAddHotelModal} 
-                onClose={closeAddHotelModal} 
-            />
+                <AddHotelModal 
+                    isOpen={showAddHotelModal} 
+                    onClose={closeAddHotelModal} 
+                />
                 <div className="admin-card">
                     <p>Total Guests: {guestsCount}</p>
                 </div>
                 <div className="admin-card">
                     <p>Total Hotels: {hotelsCount}</p>
                 </div>
+                <div className="admin-card">
+                    <button className="admin-link" onClick={toggleGuestsList}>Registered Users</button>
+                </div>
+                <div className="admin-card">
+                    <button className="admin-link" onClick={toggleBookingDetails}>Booking Details</button>
+                    {bookingsCount > 0 && (
+                        <div className="badge">Bookings: {bookingsCount}</div> 
+                    )}
+                </div>
             </div>
+
+            {showGuestsList && <GuestsList />}
+
+            {showBookingDetails && <BookingDetails />}
 
             <div className="query-form">
                 <form onSubmit={handleQuerySubmit}>

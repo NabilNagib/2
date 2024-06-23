@@ -1,0 +1,50 @@
+.guests-list-container {
+    margin-top: 20px;
+}
+
+.guests-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.guest-item {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.guest-item p {
+    margin: 5px 0;
+}
+
+.guest-item input {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Ensure inputs take full width */
+}
+
+.guest-item button {
+    margin-top: 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.guest-item button:first-of-type {
+    background-color: #28a745;
+    color: white;
+    margin: 10px;
+}
+
+.guest-item button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}

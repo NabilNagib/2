@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './GuestsList.css';
 
 const GuestsList = () => {
     const [guests, setGuests] = useState([]);
@@ -10,7 +11,7 @@ const GuestsList = () => {
             try {
                 const response = await fetch('https://one-cb6z.onrender.com/guests'); 
                 const data = await response.json();
-                // Exclude guest with id 1
+
                 const filteredData = data.filter(guest => guest.id !== 1);
                 setGuests(filteredData);
             } catch (error) {
@@ -63,11 +64,11 @@ const GuestsList = () => {
     };
 
     return (
-        <div>
+        <div className="guests-list-container">
             <h2>All Guests</h2>
-            <ul>
+            <ul className="guests-list">
                 {guests.map(guest => (
-                    <li key={guest.id}>
+                    <li key={guest.id} className="guest-item">
                         {editGuestId === guest.id ? (
                             <div>
                                 <p>
@@ -110,7 +111,6 @@ const GuestsList = () => {
                                 <p><strong>Name:</strong> {guest.firstName} {guest.secondName}</p>
                                 <p><strong>Email:</strong> {guest.email}</p>
                                 <p><strong>Mobile:</strong> {guest.mobile}</p>
-                                <button onClick={() => handleEditClick(guest)}>Edit</button>
                                 <button onClick={() => handleDeleteClick(guest.id)}>Delete</button>
                             </div>
                         )}
