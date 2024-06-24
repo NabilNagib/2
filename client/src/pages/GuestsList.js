@@ -27,10 +27,7 @@ const GuestsList = () => {
         setEditGuestData(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const handleEditClick = (guest) => {
-        setEditGuestId(guest.id);
-        setEditGuestData(guest);
-    };
+
 
     const handleSaveClick = async (id) => {
         try {

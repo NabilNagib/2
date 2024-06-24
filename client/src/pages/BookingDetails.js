@@ -33,10 +33,6 @@ const BookingDetails = () => {
         }
     };
 
-    const handleEditBooking = (id) => {
-
-        console.log(`Edit booking with ID: ${id}`);
-    };
 
     return (
         <div className="booking-details-container">

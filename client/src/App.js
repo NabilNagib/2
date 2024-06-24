@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Footer from './pages/Footer';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import AdminContainer from './pages/AdminContainer';
+import GuestsList from './pages/GuestsList';
 import './App.css';
 
 const App = () => {
@@ -18,17 +19,16 @@ const App = () => {
 };
 
 const AppRouter = () => {
-    const { isLoggedIn, email } = useAuth();
+    const { isLoggedIn, role } = useAuth();
 
     return (
         <Router>
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    {isLoggedIn && email === 'troy@mail.com' && (
+                    {isLoggedIn && role === 'admin' && (
                         <>
-                            <li><Link to="/admin">Admin Dashboard</Link></li>
-                            <li><Link to="/guests">Guests List</Link></li>
+                            <li><Link to="/dashboard">Dashboard</Link></li>
                         </>
                     )}
                     {isLoggedIn ? (
@@ -47,9 +47,9 @@ const AppRouter = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/admin" element={<AdminProtectedRoutes />} />
-                <Route path="/guests" element={<AdminProtectedRoutes />} />
-                <Route path="/dashboard" element={<AdminContainer />} />
+                <Route path="/admin" element={<AdminProtectedRoutes component={<AdminContainer />} />} />
+                <Route path="/guests" element={<AdminProtectedRoutes component={<GuestsList />} />} />
+                <Route path="/dashboard" element={<AdminProtectedRoutes component={<AdminContainer />} />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
@@ -57,19 +57,14 @@ const AppRouter = () => {
     );
 };
 
-const AdminProtectedRoutes = () => {
-    const { email } = useAuth();
+const AdminProtectedRoutes = ({ component }) => {
+    const { role } = useAuth();
 
-    if (email !== 'troy@mail.com') {
+    if (role !== 'admin') {
         return <Navigate to="/" />;
     }
 
-    return (
-        <>
-            <Route path="/admin" element={<AdminContainer />} />
-
-        </>
-    );
+    return component;
 };
 
 const Logout = () => {
